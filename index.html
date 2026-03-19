@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Shilpa Samanvai Foundation — Sarve Jana Sukhino Bhavantu</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root{
+  --P1:#580259;   /* deep plum   */
+  --P2:#8836BF;   /* purple      */
+  --A1:#D9483B;   /* coral red   */
+  --N1:#0F0014;   /* near-black  */
+  --N2:#2B0036;   /* dark plum   */
+  --W:#FFFFFF;
+  --G1:#F7F3F8;   /* warm grey   */
+  --G2:#EDE6EF;
+  --T1:#1C001F;   /* body text   */
+  --T2:#6B5370;   /* muted text  */
+  --T3:#9E85A5;   /* lighter muted */
+  --serif:'Cormorant',Georgia,serif;
+  --sans:'Jost',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:var(--sans);background:var(--W);color:var(--T1);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}ul{list-style:none;}
+img{display:block;width:100%;height:100%;object-fit:cover;}
+::selection{background:var(--P1);color:white;}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+.nav{
+  position:fixed;inset:0 0 auto;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:72px;
+  transition:background .4s var(--ease),box-shadow .4s var(--ease);
+}
+.nav.filled{
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(20px);
+  box-shadow:0 1px 0 rgba(88,2,89,.1);
+}
+.nav-logo{
+  font-family:var(--serif);font-size:1.25rem;font-weight:600;
+  color:var(--P1);letter-spacing:.01em;line-height:1.2;
+}
+.nav-logo b{display:block;font-size:.65rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--T2);font-family:var(--sans);}
+.nav-links{display:flex;align-items:center;gap:2.5rem;}
+.nav-links a{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--T2);transition:color .25s;}
+.nav-links a:hover{color:var(--P1);}
+.nav-btn{background:var(--A1);color:white!important;padding:.5rem 1.4rem;border-radius:2px;font-weight:600!important;transition:background .25s!important;}
+.nav-btn:hover{background:var(--P1)!important;}
+.hamburger{display:none;cursor:pointer;gap:5px;flex-direction:column;padding:6px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--P1);transition:.3s;}
+.mob-nav{position:fixed;inset:0;background:var(--W);z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .35s;}
+.mob-nav.open{opacity:1;pointer-events:all;}
+.mob-nav a{font-family:var(--serif);font-size:3rem;font-weight:600;color:var(--P1);}
+.mob-nav a:hover{color:var(--A1);}
+
+/* ═══════════════════════════════════════════
+   HERO  — full viewport, layered composition
+═══════════════════════════════════════════ */
+.hero{
+  min-height:100svh;
+  background:var(--N1);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+
+/* left panel */
+.hero-panel-left{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:120px 6% 7%;
+  position:relative;z-index:2;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.8rem;
+  font-size:.65rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--A1);margin-bottom:2.5rem;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--A1);}
+
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(4rem,7.5vw,8.5rem);
+  font-weight:300;line-height:.92;
+  letter-spacing:-.01em;color:var(--W);
+  margin-bottom:2rem;
+}
+.hero-h1 strong{display:block;font-weight:600;}
+.hero-h1 em{display:block;font-style:italic;color:var(--A1);font-weight:300;}
+
+.hero-subtext{
+  font-size:1rem;line-height:1.8;color:rgba(255,255,255,.45);
+  max-width:380px;margin-bottom:3rem;font-weight:300;
+}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;}
+.btn-a{
+  background:var(--A1);color:white;
+  padding:.9rem 2rem;font-size:.75rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  transition:all .3s var(--ease);display:inline-block;border:none;cursor:pointer;
+}
+.btn-a:hover{background:var(--W);color:var(--P1);transform:translateY(-2px);}
+.btn-b{
+  color:rgba(255,255,255,.5);font-size:.75rem;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,.2);
+  padding-bottom:2px;transition:all .3s;
+}
+.btn-b:hover{color:white;border-color:white;}
+
+.hero-stats-row{
+  display:flex;gap:3.5rem;
+  margin-top:5rem;padding-top:3rem;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.hst .n{font-family:var(--serif);font-size:3rem;font-weight:600;color:var(--W);line-height:1;}
+.hst .n i{font-style:normal;color:var(--A1);font-size:1.5rem;}
+.hst .l{font-size:.62rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.4rem;}
+
+/* right panel */
+.hero-panel-right{
+  position:relative;overflow:hidden;
+}
+.hero-bg-image{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to right, var(--N1) 0%, transparent 30%),
+    linear-gradient(to top, var(--N1) 0%, transparent 40%),
+    linear-gradient(135deg, rgba(88,2,89,.6) 0%, transparent 60%),
+    url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&auto=format&fit=crop&q=80') center/cover no-repeat;
+}
+.hero-panel-right-content{
+  position:absolute;bottom:7%;right:6%;left:0;
+  z-index:2;padding:0 5% 0 0;
+  text-align:right;
+}
+.hero-kannada{
+  font-family:var(--serif);font-size:clamp(.9rem,1.5vw,1.2rem);
+  font-style:italic;color:rgba(255,255,255,.35);
+  letter-spacing:.05em;margin-bottom:1.2rem;
+}
+.hero-tagline{
+  font-family:var(--serif);font-size:clamp(1.2rem,2.5vw,2rem);
+  font-weight:600;color:rgba(255,255,255,.7);
+  line-height:1.3;
+}
+/* floating pill */
+.hero-pill{
+  position:absolute;top:35%;right:6%;
+  background:var(--A1);color:white;
+  padding:1.2rem 1.8rem;z-index:3;
+  animation:float 4s ease-in-out infinite;
+}
+.hero-pill .pn{font-family:var(--serif);font-size:2.5rem;font-weight:600;line-height:1;}
+.hero-pill .pl{font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;opacity:.8;margin-top:.2rem;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+/* fade-in animations */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* ═══════════════════════════════════════════
+   SCROLL TICKER
+═══════════════════════════════════════════ */
+.ticker{height:52px;background:var(--P1);overflow:hidden;display:flex;align-items:center;}
+.ticker-belt{display:flex;white-space:nowrap;animation:roll 35s linear infinite;}
+.ticker-belt span{
+  font-family:var(--serif);font-size:1rem;font-weight:600;
+  color:rgba(255,255,255,.75);margin:0 2.5rem;letter-spacing:.04em;
+}
+.ticker-belt span::before{content:'✦ ';color:var(--A1);font-size:.55rem;vertical-align:.15em;}
+@keyframes roll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ═══════════════════════════════════════════
+   SECTION ATOMS
+═══════════════════════════════════════════ */
+.wrap{padding:8rem 5%;}
+.label{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-size:.63rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--P2);margin-bottom:1.2rem;
+}
+.label::before{content:'';width:24px;height:1px;background:var(--A1);}
+.display{
+  font-family:var(--serif);
+  font-size:clamp(2.8rem,5vw,5rem);
+  font-weight:300;line-height:1.0;letter-spacing:-.01em;color:var(--P1);
+}
+.display strong{font-weight:600;}
+.display em{font-style:italic;color:var(--A1);}
+.body-text{font-size:.97rem;line-height:1.9;color:var(--T2);font-weight:300;}
+
+/* ═══════════════════════════════════════════
+   ABOUT  — asymmetric two-column
+═══════════════════════════════════════════ */
+.about{background:var(--G1);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:700px;}
+.about-visual{
+  background:linear-gradient(160deg,#d4aad4,#9060a0);
+  position:relative;overflow:hidden;
+}
+.about-visual-img{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&auto=format&fit=crop&q=80') center/cover;
+  mix-blend-mode:overlay;opacity:.5;
+}
+.about-visual-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(88,2,89,.85) 0%, transparent 55%);
+}
+.about-visual-text{
+  position:absolute;bottom:0;left:0;right:0;padding:3rem;
+}
+.about-visual-text .yt{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.5rem;}
+.about-visual-text .yh{font-family:var(--serif);font-size:2rem;font-weight:600;color:white;line-height:1.2;}
+.about-bignum{
+  position:absolute;top:2rem;right:2rem;
+  font-family:var(--serif);font-size:10rem;font-weight:600;
+  color:rgba(255,255,255,.05);line-height:1;pointer-events:none;
+}
+.about-content{
+  background:var(--W);padding:6rem 5%;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.about-content .display{margin:1rem 0 2rem;}
+.about-principles{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2.5rem 0;}
+.ap{
+  border-top:1px solid var(--G2);padding-top:1.2rem;
+}
+.ap h5{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--P1);margin-bottom:.3rem;}
+.ap p{font-size:.82rem;color:var(--T3);line-height:1.6;margin:0;}
+.stats-band{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--G2);margin-top:2rem;
+}
+.sb{padding:1.8rem;border-right:1px solid var(--G2);transition:background .25s;}
+.sb:last-child{border-right:none;}
+.sb:hover{background:var(--G1);}
+.sb .v{font-family:var(--serif);font-size:2.8rem;font-weight:600;color:var(--P1);line-height:1;}
+.sb .v sup{font-size:1rem;color:var(--A1);}
+.sb .k{font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--T3);margin-top:.3rem;}
+
+/* ═══════════════════════════════════════════
+   PROGRAMS  — magazine-style layout
+═══════════════════════════════════════════ */
+.programs{background:var(--W);}
+.prog-top{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding-bottom:4rem;border-bottom:1px solid var(--G2);margin-bottom:0;
+}
+.prog-top p{max-width:360px;font-size:.9rem;line-height:1.8;color:var(--T2);}
+
+/* accordion-style rows */
+.prog-item{
+  border-bottom:1px solid var(--G2);
+  display:grid;grid-template-columns:80px 260px 1fr;
+  gap:3rem;align-items:start;padding:4rem 0;
+  transition:background .25s;cursor:default;
+}
+.prog-item:hover{background:var(--G1);margin:0 -5%;padding-left:5%;padding-right:5%;}
+.prog-item:last-child{border-bottom:none;}
+.pi-index{
+  font-family:var(--serif);font-size:5rem;font-weight:300;
+  color:var(--G2);line-height:1;letter-spacing:-.04em;
+  transition:color .3s;
+}
+.prog-item:hover .pi-index{color:rgba(88,2,89,.18);}
+.pi-head{}
+.pi-icon{font-size:2.2rem;margin-bottom:1rem;}
+.pi-tag{
+  font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--A1);border:1px solid rgba(217,72,59,.25);
+  padding:.25rem .7rem;display:inline-block;margin-bottom:1rem;
+}
+.pi-title{
+  font-family:var(--serif);font-size:1.9rem;font-weight:600;
+  color:var(--P1);line-height:1.1;
+}
+.pi-title em{font-style:italic;font-weight:300;}
+.pi-body{font-size:.9rem;line-height:1.85;color:var(--T2);}
+.pi-list{margin-top:1.2rem;}
+.pi-list li{
+  font-size:.87rem;color:var(--T2);padding:.4rem 0;
+  display:flex;align-items:flex-start;gap:.7rem;
+  border-bottom:1px solid var(--G2);
+}
+.pi-list li:last-child{border-bottom:none;}
+.pi-list li::before{content:'—';color:var(--A1);flex-shrink:0;margin-top:.1rem;}
+
+/* Dhrustikona feature block */
+.dhru-block{
+  background:var(--P1);padding:3.5rem 4rem;margin-top:1.5rem;
+  position:relative;overflow:hidden;display:grid;
+  grid-template-columns:1fr auto;gap:4rem;align-items:center;
+}
+.dhru-block::before{
+  content:'DHRUSTIKONA';
+  position:absolute;right:-2rem;top:50%;transform:translateY(-50%);
+  font-family:var(--serif);font-size:7rem;font-weight:600;
+  color:rgba(255,255,255,.03);line-height:1;pointer-events:none;
+  white-space:nowrap;letter-spacing:-.04em;
+}
+.dhru-block h4{
+  font-family:var(--serif);font-size:1.8rem;font-weight:600;
+  color:white;margin-bottom:.6rem;
+}
+.dhru-block p{font-size:.88rem;color:rgba(255,255,255,.5);line-height:1.75;margin:0;}
+.dhru-nums{display:flex;gap:0;flex-shrink:0;}
+.dn{
+  padding:0 2.5rem;border-left:1px solid rgba(255,255,255,.1);
+  text-align:center;
+}
+.dn:first-child{border-left:none;padding-left:0;}
+.dn .v{font-family:var(--serif);font-size:2.8rem;font-weight:600;color:var(--A1);line-height:1;}
+.dn .l{font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.3rem;}
+
+/* ═══════════════════════════════════════════
+   FOUNDER  — cinematic full section
+═══════════════════════════════════════════ */
+.founder{background:var(--N2);overflow:hidden;position:relative;}
+.founder::before{
+  content:'';position:absolute;
+  top:-30%;right:-15%;width:70%;height:120%;
+  background:radial-gradient(ellipse,rgba(136,54,191,.15) 0%,transparent 65%);
+  pointer-events:none;
+}
+.founder-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:90vh;
+}
+.founder-image{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--P1) 0%,#1a0020 100%);
+}
+.founder-image img{opacity:.6;mix-blend-mode:luminosity;}
+.founder-image-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,transparent 50%,var(--N2));
+}
+.founder-ph{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:clamp(8rem,18vw,16rem);
+  font-style:italic;font-weight:600;color:rgba(255,255,255,.04);
+  user-select:none;
+}
+/* Award ribbons on image */
+.founder-ribbons{
+  position:absolute;bottom:3rem;left:3rem;right:50%;
+  display:flex;flex-direction:column;gap:.5rem;z-index:2;
+}
+.ribbon{
+  background:rgba(255,255,255,.06);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.7);font-size:.72rem;font-weight:500;
+  padding:.4rem .9rem;letter-spacing:.04em;display:inline-block;
+  align-self:flex-start;
+}
+
+.founder-info{
+  padding:7rem 5% 7rem 5%;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:2;
+}
+.founder-info .label{color:rgba(255,255,255,.3);}
+.founder-info .label::before{background:var(--A1);}
+.founder-info .display{color:white;margin:1rem 0 .5rem;}
+.founder-role-text{
+  font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);margin-bottom:2.5rem;
+}
+.founder-info .body-text{color:rgba(255,255,255,.5);margin-bottom:1.2rem;}
+.founder-pullquote{
+  border-left:3px solid var(--A1);padding:1.4rem 2rem;
+  background:rgba(255,255,255,.03);margin:2rem 0;
+}
+.founder-pullquote p{
+  font-family:var(--serif);font-style:italic;font-size:1.4rem;
+  color:rgba(255,255,255,.8);line-height:1.55;margin:0;
+}
+.founder-facts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.07);margin:2rem 0;}
+.fft{background:var(--N2);padding:1.2rem 1.4rem;}
+.fft .fl{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.3rem;}
+.fft .fv{font-size:.88rem;color:rgba(255,255,255,.65);font-weight:400;}
+
+/* ═══════════════════════════════════════════
+   IMPACT  — bold numbers
+═══════════════════════════════════════════ */
+.impact{background:var(--G1);}
+.impact-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:5rem;}
+.impact-head p{max-width:360px;font-size:.9rem;line-height:1.8;color:var(--T2);}
+.impact-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--G2);
+}
+.ic{
+  background:var(--W);padding:3.5rem 2rem;
+  text-align:center;transition:background .25s;position:relative;
+  overflow:hidden;
+}
+.ic:hover{background:var(--P1);}
+.ic:hover .icv{color:white;}
+.ic:hover .icv i{color:rgba(255,255,255,.5);}
+.ic:hover .icl{color:rgba(255,255,255,.45);}
+.icv{
+  font-family:var(--serif);font-size:3.5rem;font-weight:600;
+  color:var(--P1);line-height:1;transition:color .3s;
+}
+.icv i{font-style:normal;color:var(--A1);font-size:1.6rem;transition:color .3s;}
+.icl{
+  font-size:.65rem;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--T3);margin-top:.6rem;
+  line-height:1.5;transition:color .3s;
+}
+.ic-wide{
+  grid-column:span 2;background:var(--P1);
+  display:flex;align-items:center;gap:3rem;padding:3rem 3.5rem;
+  text-align:left;
+}
+.ic-wide:hover{background:var(--A1);}
+.ic-wide .big{
+  font-family:var(--serif);font-size:5rem;font-weight:600;
+  color:rgba(255,255,255,.1);line-height:1;flex-shrink:0;
+}
+.ic-wide h4{font-family:var(--serif);font-size:1.4rem;color:white;margin-bottom:.5rem;}
+.ic-wide p{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.75;margin:0;}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS  — staggered layout
+═══════════════════════════════════════════ */
+.testi{background:var(--W);}
+.testi-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:5rem;}
+.testi-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:2px;background:var(--G2);
+}
+.ti{background:var(--W);padding:3.5rem;transition:background .25s;}
+.ti:nth-child(2){padding-top:6rem;}/* stagger */
+.ti:hover{background:var(--G1);}
+.ti-mark{
+  font-family:var(--serif);font-size:5rem;
+  color:var(--A1);opacity:.12;line-height:.8;
+  margin-bottom:.5rem;
+}
+.ti-text{
+  font-family:var(--serif);font-size:1.05rem;font-style:italic;
+  line-height:1.8;color:var(--T1);margin-bottom:2rem;font-weight:400;
+}
+.ti-sep{width:28px;height:1px;background:var(--A1);margin-bottom:1rem;}
+.ti-name{font-size:.88rem;font-weight:600;color:var(--P1);}
+.ti-role{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--T3);margin-top:.2rem;}
+
+/* ═══════════════════════════════════════════
+   GET INVOLVED  — horizontal strips
+═══════════════════════════════════════════ */
+.involve{background:var(--N1);}
+.involve-head{text-align:center;padding:6rem 5% 5rem;}
+.involve-head .label{justify-content:center;color:rgba(255,255,255,.3);}
+.involve-head .label::before{background:var(--A1);}
+.involve-head .display{color:white;}
+.involve-strips{}
+.strip{
+  display:grid;grid-template-columns:80px 1fr auto;
+  gap:4rem;align-items:center;
+  padding:3rem 5%;border-top:1px solid rgba(255,255,255,.06);
+  transition:background .3s;cursor:default;
+}
+.strip:hover{background:rgba(136,54,191,.07);}
+.strip-num{
+  font-family:var(--serif);font-size:3rem;font-weight:600;
+  color:rgba(255,255,255,.06);line-height:1;
+}
+.strip-content{}
+.strip-title{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:white;margin-bottom:.4rem;}
+.strip-desc{font-size:.85rem;color:rgba(255,255,255,.4);line-height:1.7;font-weight:300;}
+.strip-link{
+  color:var(--A1);font-size:.72rem;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;
+  border-bottom:1px solid rgba(217,72,59,.3);
+  padding-bottom:2px;transition:all .25s;white-space:nowrap;
+}
+.strip-link:hover{color:white;border-color:white;}
+.involve-cta{
+  padding:5rem 5% 6rem;display:flex;
+  justify-content:center;gap:1.5rem;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.btn-c{
+  background:var(--A1);color:white;
+  padding:1rem 2.5rem;font-size:.75rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  transition:all .3s;border:none;cursor:pointer;
+}
+.btn-c:hover{background:var(--W);color:var(--P1);}
+.btn-d{
+  border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);
+  padding:1rem 2.5rem;font-size:.75rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;transition:all .3s;
+}
+.btn-d:hover{border-color:white;color:white;}
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+.contact{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:600px;
+}
+.contact-left{
+  background:var(--P1);padding:7rem 5%;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.contact-left .label{color:rgba(255,255,255,.3);}
+.contact-left .label::before{background:var(--A1);}
+.contact-left .display{color:white;margin:1rem 0 2rem;}
+.contact-left p{font-size:.9rem;line-height:1.8;color:rgba(255,255,255,.5);margin-bottom:3rem;}
+.cd{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;}
+.cd-ico{
+  width:36px;height:36px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;color:var(--A1);
+}
+.cd-lbl{font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.2rem;}
+.cd-val{font-size:.88rem;color:rgba(255,255,255,.65);}
+.cd-val a{color:#bd8dff;}
+
+.contact-right{
+  background:var(--G1);padding:7rem 5%;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.fl{display:block;font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--T3);margin-bottom:.5rem;}
+.fi{
+  width:100%;background:var(--W);
+  border:1px solid var(--G2);color:var(--T1);
+  padding:.9rem 1rem;font-family:var(--sans);font-size:.9rem;
+  transition:border-color .25s;margin-bottom:1.2rem;
+}
+.fi:focus{outline:none;border-color:var(--P1);}
+.fi::placeholder{color:var(--T3);}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.fsub{
+  width:100%;background:var(--P1);color:white;
+  border:none;padding:1rem;font-family:var(--sans);
+  font-size:.75rem;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;cursor:pointer;transition:background .25s;margin-top:.5rem;
+}
+.fsub:hover{background:var(--A1);}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{background:#060009;color:rgba(255,255,255,.38);padding:5rem 5% 2rem;}
+.f-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;padding-bottom:4rem;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:2rem;}
+.f-brand{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:white;margin-bottom:1rem;}
+.f-brand span{color:var(--A1);font-style:italic;}
+.f-tagline{font-size:.84rem;line-height:1.8;margin-bottom:1.2rem;}
+.f-motto{font-family:var(--serif);font-style:italic;font-size:.88rem;color:rgba(255,255,255,.2);padding-left:1rem;border-left:2px solid var(--A1);}
+.socials{display:flex;gap:.5rem;margin-top:1.5rem;}
+.s{width:34px;height:34px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.72rem;color:rgba(255,255,255,.35);transition:all .25s;}
+.s:hover{background:var(--A1);color:white;border-color:var(--A1);}
+footer h5{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1.4rem;}
+footer li{margin-bottom:.6rem;}
+footer li a{font-size:.82rem;color:rgba(255,255,255,.33);transition:all .25s;}
+footer li a:hover{color:var(--A1);padding-left:3px;}
+.f-bot{display:flex;justify-content:space-between;font-size:.72rem;color:rgba(255,255,255,.18);}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr;}
+  .hero-panel-right{display:none;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-visual{min-height:450px;}
+  .founder-grid{grid-template-columns:1fr;}
+  .founder-image{min-height:500px;}
+  .contact{grid-template-columns:1fr;}
+  .f-grid{grid-template-columns:1fr 1fr;}
+  .impact-grid{grid-template-columns:repeat(2,1fr);}
+  .ic-wide{grid-column:span 2;}
+}
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  .nav-links{display:none;}
+  .wrap{padding:5rem 5%;}
+  .prog-item{grid-template-columns:40px 1fr;gap:1.5rem;}
+  .prog-item > :last-child{grid-column:2;}
+  .prog-top{flex-direction:column;gap:1.5rem;}
+  .dhru-block{grid-template-columns:1fr;gap:2rem;}
+  .dhru-nums{flex-direction:column;gap:1.2rem;}
+  .dn{border-left:none;padding-left:0;text-align:left;}
+  .testi-grid{grid-template-columns:1fr;}
+  .ti:nth-child(2){padding-top:3.5rem;}
+  .strip{grid-template-columns:1fr;gap:1rem;}
+  .strip-num{display:none;}
+  .impact-grid{grid-template-columns:1fr 1fr;}
+  .impact-head{flex-direction:column;gap:1.5rem;}
+  .testi-head{flex-direction:column;gap:1.5rem;}
+  .involve-cta{flex-direction:column;align-items:center;}
+  .frow{grid-template-columns:1fr;}
+  .f-grid{grid-template-columns:1fr;}
+  .f-bot{flex-direction:column;gap:.5rem;text-align:center;}
+  .about-principles{grid-template-columns:1fr;}
+  .founder-facts{grid-template-columns:1fr;}
+  .hero-stats-row{flex-wrap:wrap;gap:2rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav" id="mobNav">
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#programs" onclick="closeMob()">Programs</a>
+  <a href="#founder" onclick="closeMob()">Dr. Shilpa</a>
+  <a href="#impact" onclick="closeMob()">Impact</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+  <a href="#contact" onclick="closeMob()" style="color:var(--A1)">Donate</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">
+    Dr. Shilpa Samanvai Foundation
+    <b>Sarve Jana Sukhino Bhavantu</b>
+  </div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#programs">Programs</a>
+    <a href="#founder">Dr. Shilpa</a>
+    <a href="#impact">Impact</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-btn">Donate Now</a>
+  </div>
+  <div class="hamburger" id="ham" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-panel-left">
+    <div class="hero-eyebrow fade-up">Not-for-Profit · Bangalore, Karnataka · Est. 2018</div>
+
+    <h1 class="hero-h1 fade-up" style="transition-delay:.1s">
+      <strong>Empowering</strong>
+      Communities
+      <em>Through Purpose</em>
+    </h1>
+
+    <p class="hero-subtext fade-up" style="transition-delay:.2s">
+      A foundation dedicated to holistic community upliftment — education, healthcare, digital awareness and women's empowerment across Karnataka.
+    </p>
+
+    <div class="hero-actions fade-up" style="transition-delay:.3s">
+      <a href="#programs" class="btn-a">Explore Our Work</a>
+      <a href="#contact" class="btn-b">Partner With Us →</a>
+    </div>
+
+    <div class="hero-stats-row fade-up" style="transition-delay:.4s">
+      <div class="hst"><div class="n">50K<i>+</i></div><div class="l">Youth Reached</div></div>
+      <div class="hst"><div class="n">100<i>+</i></div><div class="l">Institutions</div></div>
+      <div class="hst"><div class="n">25<i>+</i></div><div class="l">Health Camps</div></div>
+      <div class="hst"><div class="n">17<i>+</i></div><div class="l">Years of Impact</div></div>
+    </div>
+  </div>
+
+  <div class="hero-panel-right">
+    <div class="hero-bg-image"></div>
+    <div class="hero-pill fade-up" style="transition-delay:.5s">
+      <div class="pn">50K<sup style="font-size:.9rem">+</sup></div>
+      <div class="pl">Lives Touched</div>
+    </div>
+    <div class="hero-panel-right-content fade-up" style="transition-delay:.3s">
+      <div class="hero-kannada">ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು</div>
+      <div class="hero-tagline">May All Be Happy.<br>We work to make it true.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-belt">
+    <span>Education Empowerment</span><span>Community Healthcare</span>
+    <span>Dhrustikona Digital Wellness</span><span>Women's Empowerment</span>
+    <span>80G Certified NGO</span><span>Free Health Camps</span>
+    <span>Sarve Jana Sukhino Bhavantu</span><span>Teacher Training</span>
+    <span>Education Empowerment</span><span>Community Healthcare</span>
+    <span>Dhrustikona Digital Wellness</span><span>Women's Empowerment</span>
+    <span>80G Certified NGO</span><span>Free Health Camps</span>
+    <span>Sarve Jana Sukhino Bhavantu</span><span>Teacher Training</span>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="about-visual-img"></div>
+      <div class="about-visual-overlay"></div>
+      <div class="about-bignum">30</div>
+      <div class="about-visual-text">
+        <div class="yt">Our Legacy</div>
+        <div class="yh">30+ Years of<br>Purpose-Driven Work</div>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="label">Who We Are</div>
+      <h2 class="display">Building<br><strong>Holistic</strong><br><em>Change</em></h2>
+      <p class="body-text">We bridge the gap between privilege and need — bringing essential services, support and opportunity to communities across Karnataka. Our model connects education, healthcare and digital wellbeing in one sustainable mission.</p>
+      <p class="body-text" style="margin-top:.8rem;">We don't replace public systems. We supplement them — with expertise, empathy and relentless commitment.</p>
+      <div class="about-principles">
+        <div class="ap"><h5>Compassion</h5><p>Genuine care for every person we serve.</p></div>
+        <div class="ap"><h5>Integrity</h5><p>Transparent, ethical operations always.</p></div>
+        <div class="ap"><h5>Sustainability</h5><p>Solutions that outlast our involvement.</p></div>
+        <div class="ap"><h5>Innovation</h5><p>Creative approaches to complex challenges.</p></div>
+      </div>
+      <div class="stats-band">
+        <div class="sb"><div class="v">50K<sup>+</sup></div><div class="k">Youth Reached</div></div>
+        <div class="sb"><div class="v">500<sup>+</sup></div><div class="k">Teachers Trained</div></div>
+        <div class="sb"><div class="v">1K<sup>+</sup></div><div class="k">Families Counselled</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROGRAMS ═══ -->
+<section class="programs wrap" id="programs">
+  <div class="prog-top">
+    <div>
+      <div class="label">What We Do</div>
+      <h2 class="display">Our Key<br><em>Initiatives</em></h2>
+    </div>
+    <p>Four focused areas of sustainable impact — each designed to create lasting positive change in communities that need it most.</p>
+  </div>
+
+  <div class="prog-item">
+    <div class="pi-index">01</div>
+    <div class="pi-head">
+      <div class="pi-icon">🎓</div>
+      <div class="pi-tag">Education</div>
+      <h3 class="pi-title">Education<br><em>Empowerment</em></h3>
+    </div>
+    <div>
+      <p class="pi-body">Adopting government schools across rural Karnataka — upgrading infrastructure, training teachers, and ensuring every student has access to quality, inclusive education.</p>
+      <ul class="pi-list">
+        <li>Classroom upgrades, libraries &amp; science labs</li>
+        <li>Teacher training in modern pedagogy &amp; technology</li>
+        <li>Scholarships for economically disadvantaged students</li>
+        <li>Parental engagement &amp; community programs</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="prog-item">
+    <div class="pi-index">02</div>
+    <div class="pi-head">
+      <div class="pi-icon">🏥</div>
+      <div class="pi-tag">Healthcare</div>
+      <h3 class="pi-title">Community<br><em>Healthcare</em></h3>
+    </div>
+    <div>
+      <p class="pi-body">Bringing quality healthcare to underserved communities through free health camps, preventive care, and sustainable healthcare infrastructure in rural areas.</p>
+      <ul class="pi-list">
+        <li>Free general health, dental &amp; eye screening</li>
+        <li>Women's health &amp; maternal care programs</li>
+        <li>Nutrition, disease prevention &amp; wellness sessions</li>
+        <li>Essential medicines &amp; specialist referrals</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="prog-item">
+    <div class="pi-index">03</div>
+    <div class="pi-head">
+      <div class="pi-icon">📱</div>
+      <div class="pi-tag">Flagship</div>
+      <h3 class="pi-title">Dhrustikona —<br><em>Digital Awareness</em></h3>
+    </div>
+    <div>
+      <p class="pi-body">Our pioneering initiative addressing mobile phone addiction (Nomophobia) — guiding 50,000+ students, parents and educators toward digital balance through expert-led sessions with IPS officers, psychiatrists &amp; doctors.</p>
+      <div class="dhru-block">
+        <div>
+          <h4>Program Impact</h4>
+          <p>A little internet use is positive; excessive use harms mental wellbeing. We encourage participants to unplug, reconnect with nature and build real relationships. Let's save a generation together.</p>
+        </div>
+        <div class="dhru-nums">
+          <div class="dn"><div class="v">50K+</div><div class="l">Individuals</div></div>
+          <div class="dn"><div class="v">100+</div><div class="l">Institutions</div></div>
+          <div class="dn"><div class="v">40%</div><div class="l">Screen↓</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prog-item">
+    <div class="pi-index">04</div>
+    <div class="pi-head">
+      <div class="pi-icon">👩</div>
+      <div class="pi-tag">Empowerment</div>
+      <h3 class="pi-title">Women's<br><em>Empowerment</em></h3>
+    </div>
+    <div>
+      <p class="pi-body">Built on Dr. Shilpa's doctoral research on economic empowerment through sericulture — creating sustainable livelihoods and leadership pathways for women in rural Karnataka.</p>
+      <ul class="pi-list">
+        <li>Sericulture training &amp; traditional craft development</li>
+        <li>Market linkage &amp; entrepreneurship support</li>
+        <li>Leadership development &amp; confidence workshops</li>
+        <li>Microfinance guidance &amp; SHG formation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOUNDER ═══ -->
+<section class="founder" id="founder">
+  <div class="founder-grid">
+    <div class="founder-image">
+      <!-- Replace div below with: <img src="shilpa.jpeg" alt="Dr. Shilpa H. Naveen"> -->
+      <div class="founder-ph">S</div>
+      <div class="founder-image-overlay"></div>
+      <div class="founder-ribbons">
+        <span class="ribbon">Honorary Doctorate · NITI Aayog</span>
+        <span class="ribbon">Golden Women Achiever's Award</span>
+        <span class="ribbon">Most Inspiring Woman 2022</span>
+        <span class="ribbon">Namma Kannadathi Award</span>
+        <span class="ribbon">Vistara Business Excellence</span>
+      </div>
+    </div>
+    <div class="founder-info">
+      <div class="label">Our Founder</div>
+      <h2 class="display">Dr. Shilpa<br><strong>H. Naveen</strong></h2>
+      <div class="founder-role-text">Founder &amp; Chairperson · Educator · Social Entrepreneur</div>
+      <p class="body-text">With a <strong style="color:rgba(255,255,255,.7)">Ph.D. in Economics from KSOU Mysore</strong> and 17+ years as Professor, HOD and College Coordinator — Dr. Shilpa's journey from humble beginnings to national recognition is a story of resilience, purpose and transformative leadership.</p>
+      <p class="body-text">She is also Co-Founder of Vaibhav Veda Green Ventures and a highly sought-after speaker across India — inspiring educators, entrepreneurs and change-makers through her visionary work.</p>
+      <div class="founder-pullquote">
+        <p>"Aspiration is the main fuel for progress."</p>
+      </div>
+      <div class="founder-facts">
+        <div class="fft"><div class="fl">Education</div><div class="fv">Ph.D. Economics · KSOU Mysore</div></div>
+        <div class="fft"><div class="fl">Research Focus</div><div class="fv">Women Empowerment via Sericulture</div></div>
+        <div class="fft"><div class="fl">Experience</div><div class="fv">17+ Years · Professor, HOD, Coordinator</div></div>
+        <div class="fft"><div class="fl">Co-Founder</div><div class="fv">Vaibhav Veda Green Ventures</div></div>
+      </div>
+      <a href="#contact" class="btn-a" style="margin-top:2rem;display:inline-block;">Connect With Dr. Shilpa →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IMPACT ═══ -->
+<section class="impact wrap" id="impact">
+  <div class="impact-head">
+    <div>
+      <div class="label">Our Numbers</div>
+      <h2 class="display">Impact That<br><em>Speaks</em></h2>
+    </div>
+    <p>Real, measurable change — tracked, transparent and independently audited. Every number represents a life touched.</p>
+  </div>
+  <div class="impact-grid">
+    <div class="ic"><div class="icv">50K<i>+</i></div><div class="icl">Youth reached via<br>digital awareness</div></div>
+    <div class="ic"><div class="icv">100<i>+</i></div><div class="icl">Educational<br>institutions partnered</div></div>
+    <div class="ic"><div class="icv">25<i>+</i></div><div class="icl">Free health<br>camps organised</div></div>
+    <div class="ic"><div class="icv">500<i>+</i></div><div class="icl">Teachers trained in<br>modern pedagogy</div></div>
+    <div class="ic-wide">
+      <div class="big">80G</div>
+      <div>
+        <h4>Tax-Deductible Donations</h4>
+        <p>All contributions are eligible for tax deduction under Section 80G of the Income Tax Act. We maintain complete transparency with regular financial reports and independent audits.</p>
+      </div>
+    </div>
+    <div class="ic"><div class="icv">1K<i>+</i></div><div class="icl">Families directly<br>counselled</div></div>
+    <div class="ic"><div class="icv">75<i>+</i></div><div class="icl">Expert-led<br>sessions conducted</div></div>
+    <div class="ic"><div class="icv">50<i>+</i></div><div class="icl">Villages &amp;<br>communities served</div></div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="testi wrap" id="testimonials">
+  <div class="testi-head">
+    <div>
+      <div class="label">Voices of Change</div>
+      <h2 class="display">Stories That<br><em>Matter</em></h2>
+    </div>
+    <a href="#contact" class="btn-a">Share Your Story →</a>
+  </div>
+  <div class="testi-grid">
+    <div class="ti">
+      <div class="ti-mark">"</div>
+      <p class="ti-text">Before Dhrustikona, I spent 8–9 hours daily on my phone without realising the harm. Six months after that one workshop, my life is completely different — more focused, healthier, genuinely happier.</p>
+      <div class="ti-sep"></div>
+      <div class="ti-name">Aarav S.</div>
+      <div class="ti-role">Engineering Student, Bangalore</div>
+    </div>
+    <div class="ti">
+      <div class="ti-mark">"</div>
+      <p class="ti-text">The health camp came to our village and many had never seen a doctor before. They treated us with dignity and respect. Dr. Shilpa's foundation brought hope to people who had forgotten what hope feels like.</p>
+      <div class="ti-sep"></div>
+      <div class="ti-name">Manjunath R.</div>
+      <div class="ti-role">Village Resident, Rural Karnataka</div>
+    </div>
+    <div class="ti">
+      <div class="ti-mark">"</div>
+      <p class="ti-text">In seventeen years working alongside Dr. Shilpa, I've watched her transform not just students but entire institutions. Her empathy isn't a strategy — it's who she is. Every student knows they matter to her. That's rare.</p>
+      <div class="ti-sep"></div>
+      <div class="ti-name">Dr. Rajesh M.</div>
+      <div class="ti-role">Academic Colleague, Educator</div>
+    </div>
+    <div class="ti">
+      <div class="ti-mark">"</div>
+      <p class="ti-text">When I was ready to drop out, Dr. Shilpa didn't just teach me economics — she taught me to believe in myself. She saw potential in me I couldn't see. Today I'm a successful professional because she never gave up on me.</p>
+      <div class="ti-sep"></div>
+      <div class="ti-name">Priya K.</div>
+      <div class="ti-role">Former Student &amp; Professional</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GET INVOLVED ═══ -->
+<section class="involve" id="involve">
+  <div class="involve-head">
+    <div class="label">Get Involved</div>
+    <h2 class="display" style="color:white;">Join Our<br><em>Mission</em></h2>
+  </div>
+  <div class="involve-strips">
+    <div class="strip">
+      <div class="strip-num">01</div>
+      <div class="strip-content">
+        <div class="strip-title">🤝 Volunteer With Us</div>
+        <div class="strip-desc">Share your time, skills and passion. We welcome educators, doctors, digital experts and community advocates.</div>
+      </div>
+      <a href="#contact" class="strip-link">Register Now →</a>
+    </div>
+    <div class="strip">
+      <div class="strip-num">02</div>
+      <div class="strip-content">
+        <div class="strip-title">🏢 CSR Partnership</div>
+        <div class="strip-desc">Align your corporate social responsibility goals with proven, impactful programs. Education, healthcare, digital wellness.</div>
+      </div>
+      <a href="#contact" class="strip-link">Schedule a Call →</a>
+    </div>
+    <div class="strip">
+      <div class="strip-num">03</div>
+      <div class="strip-content">
+        <div class="strip-title">💛 Donate (80G Certified)</div>
+        <div class="strip-desc">Every rupee is accounted for. Tax-deductible under Section 80G. Transparent impact reporting provided.</div>
+      </div>
+      <a href="#contact" class="strip-link">Donate Today →</a>
+    </div>
+    <div class="strip">
+      <div class="strip-num">04</div>
+      <div class="strip-content">
+        <div class="strip-title">📣 Host a Program</div>
+        <div class="strip-desc">Bring Dhrustikona, health camps or teacher training to your institution. Free for qualifying schools.</div>
+      </div>
+      <a href="#contact" class="strip-link">Request a Program →</a>
+    </div>
+  </div>
+  <div class="involve-cta">
+    <a href="#contact" class="btn-c">Contact Us Now</a>
+    <a href="#programs" class="btn-d">Learn More About Our Work</a>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <div class="label">Get In Touch</div>
+    <h2 class="display">Let's Build<br><strong>Change</strong><br><em>Together</em></h2>
+    <p>Whether you're an institution, a CSR partner, a medical volunteer, or an individual — your collaboration fuels our mission.</p>
+    <div class="cd"><div class="cd-ico">📍</div><div><div class="cd-lbl">Address</div><div class="cd-val">#1114, Barton Centre, M.G. Road, Bangalore – 560001</div></div></div>
+    <div class="cd"><div class="cd-ico">📞</div><div><div class="cd-lbl">Phone</div><div class="cd-val">+91 8103 53664</div></div></div>
+    <div class="cd"><div class="cd-ico">✉</div><div><div class="cd-lbl">Email</div><div class="cd-val"><a href="mailto:drshilpasamanvai@gmail.com">drshilpasamanvai@gmail.com</a></div></div></div>
+    <div class="cd"><div class="cd-ico">🕐</div><div><div class="cd-lbl">Hours</div><div class="cd-val">Mon–Fri 9 AM – 6 PM · Sat 9 AM – 2 PM</div></div></div>
+  </div>
+  <div class="contact-right">
+    <form id="cForm">
+      <div class="frow">
+        <div><label class="fl">Full Name</label><input class="fi" type="text" placeholder="Your name" required></div>
+        <div><label class="fl">Email</label><input class="fi" type="email" placeholder="your@email.com" required></div>
+      </div>
+      <div class="frow">
+        <div><label class="fl">Phone</label><input class="fi" type="tel" placeholder="+91 XXXXX XXXXX"></div>
+        <div>
+          <label class="fl">I'm Interested In</label>
+          <select class="fi">
+            <option>Select…</option>
+            <option>Volunteering</option>
+            <option>CSR Partnership</option>
+            <option>Donating</option>
+            <option>Hosting a Program</option>
+            <option>General Inquiry</option>
+          </select>
+        </div>
+      </div>
+      <label class="fl">Message</label>
+      <textarea class="fi" rows="5" placeholder="Tell us how you'd like to get involved…" style="resize:none;" required></textarea>
+      <button class="fsub" type="submit">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="f-grid">
+    <div>
+      <div class="f-brand">Dr. <span>Shilpa</span> Samanvai Foundation</div>
+      <p class="f-tagline">A not-for-profit committed to holistic community upliftment through sustainable education, healthcare, and digital awareness programs across Karnataka.</p>
+      <div class="f-motto">ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು</div>
+      <div class="socials">
+        <a href="#" class="s">f</a><a href="#" class="s">in</a>
+        <a href="#" class="s">tw</a><a href="#" class="s">yt</a>
+      </div>
+    </div>
+    <div>
+      <h5>Navigate</h5>
+      <ul>
+        <li><a href="#about">About Foundation</a></li>
+        <li><a href="#programs">Our Programs</a></li>
+        <li><a href="#founder">Dr. Shilpa</a></li>
+        <li><a href="#impact">Our Impact</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Programs</h5>
+      <ul>
+        <li><a href="#">Education Empowerment</a></li>
+        <li><a href="#">Community Healthcare</a></li>
+        <li><a href="#">Dhrustikona</a></li>
+        <li><a href="#">Women's Empowerment</a></li>
+        <li><a href="#">Teacher Training</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Support Us</h5>
+      <ul>
+        <li><a href="#">Donate (80G Certified)</a></li>
+        <li><a href="#">CSR Partnership</a></li>
+        <li><a href="#">Volunteer</a></li>
+        <li><a href="#">Host a Program</a></li>
+        <li><a href="#">Annual Report</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bot">
+    <span>© 2025 Dr. Shilpa Samanvai Foundation · All Rights Reserved · 80G Certified NGO · Bangalore, Karnataka</span>
+    <span>Designed with purpose &amp; compassion</span>
+  </div>
+</footer>
+
+<script>
+// Nav fill on scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('filled',scrollY>50);
+});
+
+// Mobile nav
+function toggleMob(){document.getElementById('mobNav').classList.toggle('open');}
+function closeMob(){document.getElementById('mobNav').classList.remove('open');}
+
+// Scroll reveal
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.15});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+// Trigger hero immediately
+document.querySelectorAll('.hero .fade-up').forEach(el=>{
+  setTimeout(()=>el.classList.add('visible'),100);
+});
+
+// Form
+document.getElementById('cForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const btn=e.target.querySelector('.fsub');
+  const orig=btn.textContent;
+  btn.textContent='Message Sent ✓';
+  btn.style.background='#2d6a2d';
+  setTimeout(()=>{btn.textContent=orig;btn.style.background='';e.target.reset();},3000);
+});
+</script>
+</body>
+</html>
